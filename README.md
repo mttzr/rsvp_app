@@ -1,1 +1,1 @@
-# rsvp_app
+# rsvp_app for Lab 2
