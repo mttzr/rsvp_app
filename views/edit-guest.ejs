@@ -22,27 +22,25 @@
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="overnight_accomodations">Number</label>
-                    <input type="overnight_accomodations" class="form-control" name="overnight_accomodations" id="overnight_accomodations" placeholder="Number" value="<%= guest.overnight_accomodations %>" required>
+                    <label for="overnight_accomodations">Overnight Accomodations</label>
+                    <select id="overnight_accomodations" name="overnight_accomodations" class="form-control" required>
+                        <option selected><%= guest.overnight_accomodations %></option>
+                        <option>None (local)</option>
+                        <option>Sawyer Hotel</option>
+                        <option>Other Location</option>
+                    </select>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="dietary_restrictions">Dietary Retrictions</label>
                     <select id="dietary_restrictions" name="dietary_restrictions" class="form-control" required>
                         <option selected><%= guest.dietary_restrictions %></option>
-                        <option>Goalkeeper</option>
-                        <option>Centre Back</option>
-                        <option>Right Back</option>
-                        <option>Left Back</option>
-                        <option>Defensive Midfielder</option>
-                        <option>Central Midfielder</option>
-                        <option>Attacking Midfielder</option>
-                        <option>Right Wing Forward</option>
-                        <option>Left Wing Forward</option>
-                        <option>Striker</option>
+                        <option>None</option>
+                        <option>Vegetarian</option>
+                        <option>Vegan</option>
                     </select>
                 </div>
             </div>
-            <button type="submit" class="btn btn-success float-right">Update Player</button>
+            <button type="submit" class="btn btn-success float-right">Update Guest</button>
         </form>
     <% } else { %>
         <p class="text-center">Player Not Found. Go <a href="/add">here</a> to add guests.</p>

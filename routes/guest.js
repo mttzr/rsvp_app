@@ -3,7 +3,7 @@ const fs = require('fs');
 module.exports = {
     addGuestPage: (req, res) => {
         res.render('add-guest.ejs', {
-            title: 'Welcome to RSVP | Add a new guest'
+            title: 'Welcome to RSVP_App | Add a new guest'
             ,message: ''
         });
     },
@@ -22,6 +22,10 @@ module.exports = {
         let image_name = uploadedFile.name;
         let fileExtension = uploadedFile.mimetype.split('/')[1];
         image_name = username + '.' + fileExtension;
+
+        
+        /*This app is subject to SQL injection because the code
+        allows user input to pass through as-is. No escaping or character filtering whatsoever.*/
 
         let usernameQuery = "SELECT * FROM `guests` WHERE user_name = '" + username + "'";
 
@@ -57,7 +61,7 @@ module.exports = {
                     message = "Invalid File format. Only 'gif', 'jpeg' and 'png' images are allowed.";
                     res.render('add-guest.ejs', {
                         message,
-                        title: 'Welcome to Socka | Add a new guest'
+                        title: 'Welcome to RSVP | Add a new guest'
                     });
                 }
             }
@@ -92,6 +96,13 @@ module.exports = {
             res.redirect('/');
         });
     },
+
+    /*This app is vulnerable to a CSRF attack. The delete functionality calls the following
+     url: http://localhost:5000/delete/6. This simple URL scheme could be used by an attacker
+     to trick a user into deleting a post. For example, an attacker could lure a user to the
+     RSVP app with a link embedded in an app icon for the RSVP app. This icon could include this
+     URL which would cause the user to accidentally delete guests.
+     */
     deleteGuest: (req, res) => {
         let guestId = req.params.id;
         let getImageQuery = 'SELECT image from `guests` WHERE id = "' + guestId + '"';
