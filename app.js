@@ -14,7 +14,7 @@ const port = 5000;
 const db = mysql.createConnection ({
     host: 'localhost',
     user: 'root',
-    password: 'y0ungerareyou',
+    password: '',
     database: 'rsvp'
 });
 
